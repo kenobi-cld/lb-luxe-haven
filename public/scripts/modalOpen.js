@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import { urlFor } from "../lib/sanityImage.js";
+import { urlFor } from "../../src/lib/sanityImage.js";
 import initModalCarousel from "./modalCarousel.js";
 
 const { setSlides } = initModalCarousel();

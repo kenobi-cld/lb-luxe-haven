@@ -104,10 +104,10 @@ const projects = await sanityClient.fetch(`
 <ProjectModal />
 
 <script type="module">
-  import "../src/scripts/scrollReveal.js";
-  import "../src/scripts/filterProjects.js";
-  import initCarousel from "../src/scripts/carousel.js";
-  import initProjectModal from "../src/scripts/modalOpen.js";
+  import "/scripts/scrollReveal.js";
+  import "/scripts/filterProjects.js";
+  import initCarousel from "/scripts/carousel.js";
+  import initProjectModal from "/scripts/modalOpen.js";
 
   document.addEventListener("DOMContentLoaded", () => {
     initCarousel(".embla__viewport");
