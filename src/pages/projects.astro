@@ -21,11 +21,13 @@ const projects = await sanityClient.fetch(`
     modal,
     images
   }
-`)
-
+`);
 ---
 
-<Layout title="Projects | LB Luxe Haven" description="View our portfolio of residential, commercial, and infrastructure projects delivered with a commitment to quality, timelines, and client trust.">
+<Layout
+  title="Projects | LB Luxe Haven"
+  description="View our portfolio of residential, commercial, and infrastructure projects delivered with a commitment to quality, timelines, and client trust."
+>
   <Navbar />
 
   <HeroSub
@@ -50,7 +52,9 @@ const projects = await sanityClient.fetch(`
       Each project reflects our commitment to quality construction, on-time
       delivery, safety compliance, and long-term value for stakeholders.
     </p>
-    <div class="flex flex-wrap px-1 gap-2 items-center justify-center mt-8 my-4">
+    <div
+      class="flex flex-wrap px-1 gap-2 items-center justify-center mt-8 my-4"
+    >
       <button
         class="filter-btn px-2 py-1 rounded border border-gray-600 uppercase grotesk font-medium cursor-pointer"
         data-filter="all">All</button
@@ -74,18 +78,17 @@ const projects = await sanityClient.fetch(`
     </div>
 
     <Grid cols={2} size="md" tw="mx-auto">
-  {
-    projects.map((project: any) => (
-      <div
-        class="project-item transition-all duration-500 ease-out"
-        data-tags={project.tags.join(",")}
-      >
-        <ProjectCard project={project} />
-      </div>
-    ))
-  }
-</Grid>
-
+      {
+        projects.map((project: any) => (
+          <div
+            class="project-item transition-all duration-500 ease-out"
+            data-tags={project.tags.join(",")}
+          >
+            <ProjectCard project={project} />
+          </div>
+        ))
+      }
+    </Grid>
 
     <p id="no-results" class="hidden text-center my-16 text-gray-500 text-lg">
       No projects matches this filter.
@@ -100,19 +103,14 @@ const projects = await sanityClient.fetch(`
 
 <ProjectModal />
 
-<script type="module" src="../src/scripts/scrollReveal.js"></script>
-<script type="module" src="../src/scripts/filterProjects.js"></script>
 <script type="module">
-import initCarousel from "../src/scripts/carousel.js";
+  import "../src/scripts/scrollReveal.js";
+  import "../src/scripts/filterProjects.js";
+  import initCarousel from "../src/scripts/carousel.js";
+  import initProjectModal from "../src/scripts/modalOpen.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-  initCarousel(".embla__viewport");
-});
-</script>
-<script type="module">
-import initProjectModal from "../src/scripts/modalOpen.js";
-
-document.addEventListener("DOMContentLoaded", () => {
-  initProjectModal();
-});
+  document.addEventListener("DOMContentLoaded", () => {
+    initCarousel(".embla__viewport");
+    initProjectModal();
+  });
 </script>

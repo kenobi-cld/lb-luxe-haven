@@ -5,76 +5,86 @@ import HeroSub from "../components/Hero-Sub.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Contact | LB Luxe Haven" description="Get in touch with our team to start a conversation about your project, partnership opportunities, or general inquiries.">
-    <Navbar />
-    <HeroSub title="Contact" description="Connect with our team to discuss project requirements, collaboration opportunities, or general inquiries and begin building with confidence and clarity." />
+<Layout
+  title="Contact | LB Luxe Haven"
+  description="Get in touch with our team to start a conversation about your project, partnership opportunities, or general inquiries."
+>
+  <Navbar />
+  <HeroSub
+    title="Contact"
+    description="Connect with our team to discuss project requirements, collaboration opportunities, or general inquiries and begin building with confidence and clarity."
+  />
 
-<section class="gsap-block w-full flex justify-center px-4 py-16">
-  <form
-    id="contact-form"
-    class="w-full max-w-xl flex flex-col gap-6"
-    novalidate
-  >
-    <div class="gsap-text">
-      <label for="name" class="block grotesk font-medium mb-1">Name</label>
-      <input
-        id="name"
-        name="name"
-        type="text"
-        required
-        autocomplete="off"
-        class="w-full rounded-lg border border-gray-300 px-4 py-3 grotesk focus:outline-none focus:ring-2 focus:ring-logo-primary"
-      />
-    </div>
-
-    <div class="gsap-text">
-      <label for="email" class="block grotesk font-medium mb-1">Email</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        autocomplete="off"
-        class="w-full rounded-lg border border-gray-300 px-4 py-3 grotesk focus:outline-none focus:ring-2 focus:ring-logo-primary"
-      />
-    </div>
-
-    <div class="gsap-text">
-      <label for="phone" class="block grotesk font-medium mb-1">Phone</label>
-      <input
-        id="phone"
-        name="phone"
-        type="tel"
-        autocomplete="off"
-        class="w-full rounded-lg border border-gray-300 px-4 py-3 grotesk focus:outline-none focus:ring-2 focus:ring-logo-primary"
+  <section class="gsap-block w-full flex justify-center px-4 py-16">
+    <form
+      id="contact-form"
+      class="w-full max-w-xl flex flex-col gap-6"
+      novalidate
+    >
+      <div class="gsap-text">
+        <label for="name" class="block grotesk font-medium mb-1">Name</label>
+        <input
+          id="name"
+          name="name"
+          type="text"
+          required
+          autocomplete="off"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 grotesk focus:outline-none focus:ring-2 focus:ring-logo-primary"
         />
       </div>
 
-    <div class="gsap-text">
-      <label for="message" class="block grotesk font-medium mb-1">Message</label>
-      <textarea
-      id="message"
-        name="message"
-        rows="5"
-        autocomplete="off"
-        required
-        class="w-full rounded-lg border border-gray-300 px-4 py-3 grotesk resize-none focus:outline-none focus:ring-2 focus:ring-logo-primary"
-      ></textarea>
-    </div>
+      <div class="gsap-text">
+        <label for="email" class="block grotesk font-medium mb-1">Email</label>
+        <input
+          id="email"
+          name="email"
+          type="email"
+          autocomplete="off"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 grotesk focus:outline-none focus:ring-2 focus:ring-logo-primary"
+        />
+      </div>
 
-    <div class="gsap-text pt-2">
-    <p id="form-status" class="grotesk text-sm font-medium text-center opacity-0 transition-opacity duration-300 h-8"></p>
+      <div class="gsap-text">
+        <label for="phone" class="block grotesk font-medium mb-1">Phone</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          autocomplete="off"
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 grotesk focus:outline-none focus:ring-2 focus:ring-logo-primary"
+        />
+      </div>
 
-      <button
-        type="submit"
-        class="w-full rounded-xl bg-logo-primary px-6 py-4 text-white mona font-bold tracking-tight hover:opacity-90 transition"
-      >
-        Send Message
-      </button>
-    </div>
-  </form>
-</section>
+      <div class="gsap-text">
+        <label for="message" class="block grotesk font-medium mb-1"
+          >Message</label
+        >
+        <textarea
+          id="message"
+          name="message"
+          rows="5"
+          autocomplete="off"
+          required
+          class="w-full rounded-lg border border-gray-300 px-4 py-3 grotesk resize-none focus:outline-none focus:ring-2 focus:ring-logo-primary"
+        ></textarea>
+      </div>
 
+      <div class="gsap-text pt-2">
+        <p
+          id="form-status"
+          class="grotesk text-sm font-medium text-center opacity-0 transition-opacity duration-300 h-8"
+        >
+        </p>
 
-    <Footer />
-    <script type="module" src="../src/scripts/contactForm.js"></script>
+        <button
+          type="submit"
+          class="w-full rounded-xl bg-logo-primary px-6 py-4 text-white mona font-bold tracking-tight hover:opacity-90 transition"
+        >
+          Send Message
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <Footer />
 </Layout>

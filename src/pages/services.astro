@@ -16,24 +16,52 @@ const services = await sanityClient.fetch(`
 `);
 ---
 
-<Layout title="Services | LB Luxe Haven" description="Services | LB Luxe Haven - Explore our end-to-end construction, engineering, and project management services tailored for residential, commercial, and institutional developments.">
+<Layout
+    title="Services | LB Luxe Haven"
+    description="Services | LB Luxe Haven - Explore our end-to-end construction, engineering, and project management services tailored for residential, commercial, and institutional developments."
+>
     <Navbar />
-    <HeroSub title="Services" description="End-to-end construction and development services delivered with precision, accountability, and deep industry knowledge across planning, execution, and project management.">
-    <Button href="/contact">Know more</Button>
+    <HeroSub
+        title="Services"
+        description="End-to-end construction and development services delivered with precision, accountability, and deep industry knowledge across planning, execution, and project management."
+    >
+        <Button href="/contact">Know more</Button>
     </HeroSub>
 
     <section class="flex flex-wrap gap-2 items-center justify-center">
         {
             services.map((service: any) => (
-                <div key={service.id} class="flex w-120 rounded p-2 flex-col gap-24 border">
+                <div
+                    key={service.id}
+                    class="flex w-120 rounded p-2 flex-col gap-24 border"
+                >
                     <span class="ml-auto">{service.id}</span>
                     <div class="flex flex-col gap-1">
                         <h2 class="mona font-bold text-2xl">{service.title}</h2>
-                        <p class="grotesk text-gray-900">{service.description}</p>
+                        <p class="grotesk text-gray-900">
+                            {service.description}
+                        </p>
                     </div>
                 </div>
             ))
         }
+    </section>
+
+    <section class="text-center">
+        <span
+            class="mt-120 uppercase text-sm mona font-bold bg-logo-primary text-white px-3 py-1 rounded"
+            >Projects</span
+        >
+
+        <h2 class="mona tracking-tight text-3xl font-bold mt-2 mb-4">
+            Discover Our Signature Projects
+        </h2>
+        <p class="text-gray-600 mb-6 max-w-2xl mx-auto">
+            Explore the elegance and sophistication of LB Luxe Haven's
+            portfolio. From luxury residences to boutique commercial spaces, our
+            projects reflect timeless design and meticulous craftsmanship.
+        </p>
+        <Button href="/projects"> View All Projects </Button>
     </section>
     <Footer />
 </Layout>
