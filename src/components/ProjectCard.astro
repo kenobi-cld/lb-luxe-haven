@@ -1,0 +1,20 @@
+---
+import { urlFor } from "../lib/sanityImage";
+const { project } = Astro.props;
+
+const coverImage = project.images?.[0];
+const coverImageUrl = coverImage ? urlFor(coverImage).width(800).url() : '';
+---
+
+<div class="project-card rounded-xl bg-logo-primary p-2 cursor-pointer gsap-blocl" data-project={JSON.stringify(project)}>
+  <div class="relative rounded-lg gsap-block">
+    <img src={coverImageUrl} alt={project.title} class="w-full h-[340px] object-cover rounded-lg" />
+      <h2 class="title-trapezoid absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 title-text plex font-bold text-lg uppercase text-center whitespace-nowrap">
+          {project.title}
+      </h2>
+  </div>
+  <div class="pt-8 pb-2 px-2 gsap-blocl">
+    <p class="text-sm gsap-text text-white mb-1">{project.description}</p>
+    <p class="text-sm gsap-text text-white/75">{project.location}</p>
+  </div>
+</div>

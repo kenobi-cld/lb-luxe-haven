@@ -1,0 +1,51 @@
+---
+interface Props {
+  link?: boolean;
+  href?: string;
+  tw?: string;
+  variant?: "dark" | "white";
+}
+
+const {
+  link = true,
+  href,
+  tw,
+  variant = "dark",
+} = Astro.props;
+
+const base =
+  `px-3 py-2 rounded leading-none uppercase grotesk font-semibold cursor-pointer ${tw}`;
+
+const variants = {
+  dark: "bg-stone-700 text-white dark",
+  white: "bg-white text-stone-800 white",
+};
+---
+
+{
+  link ? (
+    <a class={`${base} ${variants[variant]}`} href={href}>
+      <slot />
+    </a>
+  ) : (
+    <button class={`${base} ${variants[variant]}`}>
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  /* Dark button */
+  .dark {
+    box-shadow:
+      0 0 2px 1px white inset,
+      0 0 0 1px oklch(37.4% 0.01 67.558);
+  }
+
+  /* White button */
+  .white {
+    box-shadow:
+      0 0 2px 1px oklch(90% 0 0) inset,
+      0 0 0 1px oklch(80% 0.01 67.558);
+  }
+</style>

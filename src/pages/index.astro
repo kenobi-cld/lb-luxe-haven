@@ -1,11 +1,144 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { sanityClient } from "../lib/sanity";
+import Button from "../components/Button.astro";
+export const latestProjectsQuery = `
+  *[_type == "project"]
+  | order(_createdAt desc)
+  [0...4]{
+    _id,
+    title,
+    description,
+    location,
+    images,
+    category,
+    tags,
+    modal
+  }
+`;
+export const homeFeaturesQuery = `
+  *[_type == "features"] | order(_createdAt asc) {
+    title,
+    description
+  }
+`;
+
+
+const projects = await sanityClient.fetch(latestProjectsQuery);
+
+const features = await sanityClient.fetch(homeFeaturesQuery);
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="LB Luxe Haven" description="Luxury construction and real estate development">
+  <Navbar />
+<div
+  class="relative w-[calc(100vw-4rem)] min-h-[calc(100vh-8rem)] mx-auto md:px-6 md:pb-10 pb-4 px-4 bg-cover bg-center rounded-2xl mt-24 pt-20 overflow-hidden flex items-end"
+  style="background-image: url('https://www.placehold.net/1600x900');"
+  >
+
+    <div class="absolute inset-0 bg-black/30"></div>
+    <div class="relative grid grid-cols-12 h-full w-full gap-4 mx-auto md:px-6 px-0 pt-6">
+      <div class="col-span-12 md:col-span-6 flex flex-col justify-center gap-4 gsap-text">
+        <h1 class="mona font-black tracking-tight md:text-5xl text-3xl text-white leading-tight">
+          Building Spaces<br />That Endure.
+        </h1>
+
+        <p class="grotesk text-white text-balance md:text-md text-sm">
+          LB Luxe Haven delivers premium residential and commercial developments
+          through disciplined execution, technical excellence, and long-term
+          value creation.
+        </p>
+
+        <div class="flex gap-3 mt-2">
+          <Button href="/about" >
+            Know More
+          </Button>
+          <Button href="/contact" variant="white">
+            Contact Us
+          </Button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<section class="mt-24 mx-auto px-6">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {features.map((feature: any, index: any) => (
+      <div class="gsap-block bg-gray-200 rounded-xl p-4 flex flex-col justify-between min-h-[220px]">
+        <span class="mona font-bold text-sm text-gray-500 ml-auto gsap-text">
+          {String(index + 1).padStart(2, "0")}
+        </span>
+
+        <div class="mt-6">
+          <h3 class="mona font-bold text-xl mb-2 gsap-text">
+            {feature.title}
+          </h3>
+          <p class="grotesk text-sm text-gray-700 gsap-text">
+            {feature.description}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+
+  <section class="mt-24 max-w-3xl mx-auto text-center px-6 gsap-text">
+    <h2 class="mona font-black tracking-tight text-4xl mt-24">
+      Engineering Excellence with Integrity
+    </h2>
+    <p class="grotesk mt-4 text-balance mb-12">
+      With a focus on quality, safety, and sustainability, LB Luxe Haven
+      transforms concepts into enduring built environments across residential,
+      institutional, and commercial sectors.
+    </p>
+    <Button href="/projects" variant="white">
+      View all
+    </Button>
+  </section>
+
+  <section class="mt-24 max-w-7xl mx-auto px-6">
+   <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      {projects.map((project: any) => (
+        <ProjectCard project={project} />
+      ))}
+    </div>
+  </section>
+
+<section class="mt-24 max-w-7xl mx-auto px-6 relative">
+  <div class="relative bg-gray-200 mt-40 rounded-2xl flex items-end justify-end p-8 gap-6 overflow-visible">
+
+    <!-- Left Side (image container sticking out) -->
+    <div class="relative flex-1 flex justify-end items-end">
+      <div class="absolute bottom-0 left-0 w-full h-[250px] bg-gray-400 rounded-xl bg-cover bg-center gsap-block"
+           style="background-image: url('https://placehold.net/600x800.png')">
+      </div>
+    </div>
+
+    <!-- Right Side (text) -->
+    <div class="flex-1 z-10 gsap-block">
+      <h3 class="mona tracking-tight font-black text-3xl mt-2 gsap-text">
+        Let's Build Something Exceptional
+      </h3>
+      <p class="grotesk mt-2 my-4 max-w-xl gsap-text">
+        Choose LB Luxe Haven for developments that offer premium quality, consistent reliability, and enduring value designed to enhance your lifestyle.
+      </p>
+      <Button href="/contact">
+        Contact Us
+      </Button>
+    </div>
+
+  </div>
+</section>
+
+
+  <Footer />
+  <script type="module" src="../src/scripts/heroIntro.js"></script>
+  <script type="module" src="../src/scripts/scrollReveal.js"></script>
+  <script type="module" src="../src/scripts/textReveal.js"></script>
 </Layout>
+

@@ -1,0 +1,60 @@
+---
+import AboutPage from "../components/AboutPage.astro";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import Testimonials from "../components/Testimonials.astro";
+import { sanityClient } from "../lib/sanity";
+
+export const testimonials = await sanityClient.fetch(`
+  *[_type == "testimonial"] | order(_createdAt desc) {
+    id,
+    testimonial,
+    person,
+    occupation
+  }
+`);
+
+---
+
+<Layout title="About | LB Luxe Haven" description="About LB Luxe Haven | Learn about our journey, values, and expertise in delivering high-quality construction and development projects with a focus on trust, safety, and lasting value.">
+  <Navbar />
+
+  <AboutPage
+    heroTitle="About LB Luxe Haven"
+    heroDescription="A company built on integrity, technical expertise, and disciplined execution, focused on delivering durable developments that create long-term value through responsible construction practices."
+
+    vision={{
+      eyebrow: "Vision",
+      title: "Building with purpose, clarity, and long-term responsibility.",
+      content: [
+        "At LB Luxe Haven, our vision is to create spaces that stand the test of time—structurally, functionally, and ethically. We believe development should enhance communities, respect resources, and deliver measurable value to every stakeholder involved.",
+        "Our approach combines engineering precision with thoughtful planning, ensuring that every project reflects quality workmanship, safety compliance, and enduring design relevance."
+      ]
+    }}
+
+    philosophy={{
+      title: "A disciplined approach to construction and development.",
+      content: [
+        "Our philosophy is rooted in process-driven execution and accountability at every stage of a project. From feasibility and design coordination to construction and final delivery, we operate with structured systems that minimize risk and maximize efficiency.",
+        "We place equal importance on technical accuracy, transparent communication, and adherence to timelines, ensuring predictable outcomes for clients and partners."
+      ]
+    }}
+
+    highlight={{
+      title: "Commitment beyond completion.",
+      content: [
+        "LB Luxe Haven views each project as a long-term responsibility rather than a short-term transaction. We focus on durability, lifecycle performance, and operational practicality, enabling our developments to retain value well beyond handover.",
+        "This commitment has enabled us to build lasting relationships with clients, consultants, and contractors who share our standards for quality and professionalism."
+      ]
+    }}
+
+  />
+<Testimonials
+  title="What Our Clients Say"
+  description="Feedback from clients and collaborators reflecting our commitment to quality, transparency, and disciplined execution."
+  testimonials={testimonials}
+/>
+
+  <Footer />
+</Layout>

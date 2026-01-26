@@ -1,0 +1,99 @@
+---
+import Button from "./Button.astro";
+import HeroSub from "./Hero-Sub.astro";
+
+interface Section {
+    eyebrow?: string;
+    title: string;
+    content: string[];
+}
+
+interface Person {
+    name: string;
+    role: string;
+    bio: string;
+}
+
+interface Props {
+    heroTitle: string;
+    heroDescription: string;
+    vision: Section;
+    philosophy: Section;
+    highlight: Section;
+    leadership?: Person[];
+}
+
+const {
+    heroTitle,
+    heroDescription,
+    vision,
+    philosophy,
+    highlight,
+    leadership,
+} = Astro.props;
+---
+
+<HeroSub title={heroTitle} description={heroDescription}>
+    <Button href="/contact">Know more</Button>
+</HeroSub>
+
+
+<section class="grid grid-cols-1 md:grid-cols-2 gap-12">
+    <img
+        src="https://placehold.net/600x800.png"
+        alt="Vision of LB Luxe Haven"
+    />
+    <div>
+        {
+            vision.eyebrow && (
+                <span class="uppercase text-sm mona font-bold bg-logo-primary text-white px-3 py-1 rounded">
+                    {vision.eyebrow}
+                </span>
+            )
+        }
+        <h2 class="mona font-black text-4xl tracking-tight mt-4">
+            {vision.title}
+        </h2>
+        <div class="space-y-4 text-gray-700 grotesk">
+            {vision.content.map((p) => <p>{p}</p>)}
+        </div>
+    </div>
+</section>
+
+<!-- Philosophy -->
+<section class="space-y-6 max-w-4xl">
+    <h3 class="mona font-black text-3xl tracking-tight">
+        {philosophy.title}
+    </h3>
+    <div class="space-y-4 text-gray-700 grotesk">
+        {philosophy.content.map((p) => <p>{p}</p>)}
+    </div>
+</section>
+
+<!-- Highlight -->
+<section class="bg-gray-100 rounded-2xl p-10 space-y-6">
+    <h3 class="mona font-black text-3xl tracking-tight">
+        {highlight.title}
+    </h3>
+    <div class="space-y-4 text-gray-700 grotesk max-w-4xl">
+        {highlight.content.map((p) => <p>{p}</p>)}
+    </div>
+</section>
+
+{
+    leadership && (
+        <section class="space-y-12">
+            <h3 class="mona font-black text-3xl tracking-tight">Leadership</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                {leadership?.map((person) => (
+                    <div class="space-y-2">
+                        <p class="mona font-bold">{person.name}</p>
+                        <p class="text-sm text-gray-500">{person.role}</p>
+                        <p class="grotesk text-gray-700">{person.bio}</p>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )
+}

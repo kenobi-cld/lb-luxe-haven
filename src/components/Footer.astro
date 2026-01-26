@@ -1,0 +1,41 @@
+---
+import astroLogo from "../assets/logo.svg";
+---
+<footer class="bg-gray-200 p-8 mt-16">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+    <div class="flex flex-1 flex-col items-start gap-4 md:gap-8">
+      <div class="flex gap-2 items-center w-fit justify-center">
+        <a href="/" class="flex items-center gap-3">
+          <img src={astroLogo.src} class="w-12 h-12" fetchpriority="high" />
+          <span class="font-bold tracking-tight mona text-lg">LB Luxe Haven</span>
+        </a>
+      </div>
+      <p class="text-sm text-gray-700 max-w-sm">
+        LB Luxe Haven is committed to delivering high-quality, sustainable developments with integrity, technical expertise, and disciplined execution. We create spaces that endure, enhance communities, and deliver lasting value.
+      </p>
+    </div>
+
+    <div class="flex flex-1 flex-wrap gap-6 md:gap-12 items-start justify-center">
+      <div class="flex flex-col gap-2 md:gap-4">
+        <span class="mona tracking-tight font-semibold">Quick Links</span>
+        <a href="/about" class="grotesk text-gray-700 text-sm hover:text-gray-900">About</a>
+        <a href="/services" class="grotesk text-gray-700 text-sm hover:text-gray-900">Services</a>
+        <a href="/projects" class="grotesk text-gray-700 text-sm hover:text-gray-900">Projects</a>
+        <a href="/certifications" class="grotesk text-gray-700 text-sm hover:text-gray-900">Certifications</a>
+        <a href="/contact" class="grotesk text-gray-700 text-sm hover:text-gray-900">Contact Us</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-8 text-center text-gray-600 text-sm grotesk">
+    <i class="ti ti-copyright"></i> <span id="year"></span> LB Luxe Haven. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  const year = document.getElementById("year");
+  const num = new Date().getFullYear();
+  if (year) {
+    year.innerHTML = String(num);
+  }
+</script>

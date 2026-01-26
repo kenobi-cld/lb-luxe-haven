@@ -1,0 +1,129 @@
+[
+  {
+    "id": "p1",
+    "title": "Panchavati Township",
+    "description": "A large-scale residential township focused on community living.",
+    "location": "Visakhapatnam, India",
+    "image": "https://placehold.net/600x800.png",
+    "category": "COMPLETED",
+    "tags": ["residential", "Township"],
+    "modal": {
+      "overview": "Panchavati Township is a planned residential development integrating housing, roads, drainage, and green spaces.",
+      "scope": [
+        "Master planning",
+        "Residential blocks",
+        "Infrastructure & utilities",
+        "Landscaping"
+      ],
+      "outcome": "Delivered with high construction quality and long-term value."
+    }
+  },
+  {
+    "id": "p2",
+    "title": "World Bank Aided Hospital",
+    "description": "Institutional healthcare infrastructure project.",
+    "location": "Gudur, Andhra Pradesh",
+    "image": "https://placehold.net/600x800.png",
+    "category": "COMPLETED",
+    "tags": ["Healthcare", "Institutional"],
+    "modal": {
+      "overview": "A hospital built under World Bank norms with seismic compliance.",
+      "scope": [
+        "RCC structure",
+        "Medical interiors",
+        "Safety systems"
+      ],
+      "outcome": "Successfully commissioned for public healthcare."
+    }
+  },
+  {
+    "id": "p3",
+    "title": "APIIC Industrial Development",
+    "description": "Industrial site development and PEB structures.",
+    "location": "Patancheru, Telangana",
+    "image": "https://placehold.net/600x800.png",
+    "category": "ONGOING",
+    "tags": ["Industrial", "Infrastructure"],
+    "modal": {
+      "overview": "Industrial infrastructure development for manufacturing facilities.",
+      "scope": [
+        "Site grading",
+        "PEB structures",
+        "Crane beams"
+      ],
+      "outcome": "Currently under phased execution."
+    }
+  },
+  {
+    "id": "p4",
+    "title": "APIIC Industrial Development",
+    "description": "Industrial site development and PEB structures.",
+    "location": "Patancheru, Telangana",
+    "image": "https://placehold.net/600x800.png",
+    "category": "ONGOING",
+    "tags": ["Industrial", "Infrastructure"],
+    "modal": {
+      "overview": "Industrial infrastructure development for manufacturing facilities.",
+      "scope": [
+        "Site grading",
+        "PEB structures",
+        "Crane beams"
+      ],
+      "outcome": "Currently under phased execution."
+    }
+  },
+  {
+    "id": "p5",
+    "title": "APIIC Industrial Development",
+    "description": "Industrial site development and PEB structures.",
+    "location": "Patancheru, Telangana",
+    "image": "https://placehold.net/600x800.png",
+    "category": "ONGOING",
+    "tags": ["Industrial", "Infrastructure"],
+    "modal": {
+      "overview": "Industrial infrastructure development for manufacturing facilities.",
+      "scope": [
+        "Site grading",
+        "PEB structures",
+        "Crane beams"
+      ],
+      "outcome": "Currently under phased execution."
+    }
+  },
+  {
+    "id": "p6",
+    "title": "APIIC Industrial Development",
+    "description": "Industrial site development and PEB structures.",
+    "location": "Patancheru, Telangana",
+    "image": "https://placehold.net/600x800.png",
+    "category": "ONGOING",
+    "tags": ["Industrial", "Infrastructure"],
+    "modal": {
+      "overview": "Industrial infrastructure development for manufacturing facilities.",
+      "scope": [
+        "Site grading",
+        "PEB structures",
+        "Crane beams"
+      ],
+      "outcome": "Currently under phased execution."
+    }
+  },
+  {
+    "id": "p7",
+    "title": "APIIC Industrial Development",
+    "description": "Industrial site development and PEB structures.",
+    "location": "Patancheru, Telangana",
+    "image": "https://placehold.net/600x800.png",
+    "category": "ONGOING",
+    "tags": ["Industrial", "Infrastructure"],
+    "modal": {
+      "overview": "Industrial infrastructure development for manufacturing facilities.",
+      "scope": [
+        "Site grading",
+        "PEB structures",
+        "Crane beams"
+      ],
+      "outcome": "Currently under phased execution."
+    }
+  }
+]

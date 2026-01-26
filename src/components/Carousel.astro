@@ -1,0 +1,28 @@
+---
+const { images = [], altPrefix = "" } = Astro.props;
+---
+
+<div class="carousel relative w-full overflow-hidden">
+  <div class="carousel-inner flex transition-transform duration-300">
+    {images.map((img: any, i: any) => (
+      <div class="carousel-slide min-w-full rounded-lg">
+        <img src={img.url} alt={`${altPrefix} ${i + 1}`} class="w-full object-cover" />
+      </div>
+    ))}
+  </div>
+
+  <!-- Buttons -->
+  <button class="carousel-btn left absolute top-1/2 -translate-y-1/2 left-2 bg-black/50 text-white p-2 rounded">
+    &#10094;
+  </button>
+  <button class="carousel-btn right absolute top-1/2 -translate-y-1/2 right-2 bg-black/50 text-white p-2 rounded">
+    &#10095;
+  </button>
+</div>
+
+<style>
+.carousel-slide img {
+  width: 100%;
+  display: block;
+}
+</style>

@@ -1,0 +1,118 @@
+---
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+import HeroSub from "../components/Hero-Sub.astro";
+import Grid from "../components/GridHelper.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ProjectModal from "../components/ProjectModal.astro";
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+
+import { sanityClient } from "../lib/sanity";
+
+const projects = await sanityClient.fetch(`
+  *[_type == "project"] | order(_createdAt desc) {
+    _id,
+    title,
+    description,
+    location,
+    category,
+    tags,
+    modal,
+    images
+  }
+`)
+
+---
+
+<Layout title="Projects | LB Luxe Haven" description="View our portfolio of residential, commercial, and infrastructure projects delivered with a commitment to quality, timelines, and client trust.">
+  <Navbar />
+
+  <HeroSub
+    title="Projects | LB Luxe Haven"
+    description="A portfolio of residential, institutional, and industrial projects delivered through decades of engineering expertise, disciplined execution, and ethical business practices."
+  >
+    <Button href="/contact">Know more</Button>
+  </HeroSub>
+
+  <section class="max-w-6xl mx-auto px-6">
+    <h2 class="mona text-5xl mb-4 mt-16 font-bold tracking-tight">
+      Selected Works & Ongoing Developments
+    </h2>
+
+    <p class="max-w-2xl text-gray-700 mb-2">
+      Our work spans residential townships, institutional buildings, industrial
+      facilities, and large-scale infrastructure projects executed for public
+      and private sector clients.
+    </p>
+
+    <p class="max-w-2xl text-gray-700 mb-2">
+      Each project reflects our commitment to quality construction, on-time
+      delivery, safety compliance, and long-term value for stakeholders.
+    </p>
+    <div class="flex flex-wrap px-1 gap-2 items-center justify-center mt-8 my-4">
+      <button
+        class="filter-btn px-2 py-1 rounded border border-gray-600 uppercase grotesk font-medium cursor-pointer"
+        data-filter="all">All</button
+      >
+      <button
+        class="filter-btn px-2 py-1 rounded border border-gray-600 uppercase grotesk font-medium cursor-pointer"
+        data-filter="ongoing">Ongoing</button
+      >
+      <button
+        class="filter-btn px-2 py-1 rounded border border-gray-600 uppercase grotesk font-medium cursor-pointer"
+        data-filter="completed">Completed</button
+      >
+      <button
+        class="filter-btn px-2 py-1 rounded border border-gray-600 uppercase grotesk font-medium cursor-pointer"
+        data-filter="residential">Residential</button
+      >
+      <button
+        class="filter-btn px-2 py-1 rounded border border-gray-600 uppercase grotesk font-medium cursor-pointer"
+        data-filter="commercial">Commercial</button
+      >
+    </div>
+
+    <Grid cols={2} size="md" tw="mx-auto">
+  {
+    projects.map((project: any) => (
+      <div
+        class="project-item transition-all duration-500 ease-out"
+        data-tags={project.tags.join(",")}
+      >
+        <ProjectCard project={project} />
+      </div>
+    ))
+  }
+</Grid>
+
+
+    <p id="no-results" class="hidden text-center my-16 text-gray-500 text-lg">
+      No projects matches this filter.
+      <span class="block text-sm text-gray-400">
+        Try selecting a different category.
+      </span>
+    </p>
+  </section>
+
+  <Footer />
+</Layout>
+
+<ProjectModal />
+
+<script type="module" src="../src/scripts/scrollReveal.js"></script>
+<script type="module" src="../src/scripts/filterProjects.js"></script>
+<script type="module">
+import initCarousel from "../src/scripts/carousel.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  initCarousel(".embla__viewport");
+});
+</script>
+<script type="module">
+import initProjectModal from "../src/scripts/modalOpen.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  initProjectModal();
+});
+</script>
