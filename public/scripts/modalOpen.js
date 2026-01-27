@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import {gsap} from "gsap";
 import { urlFor } from "../../src/lib/sanityImage.js";
 import initModalCarousel from "./modalCarousel.js";
 

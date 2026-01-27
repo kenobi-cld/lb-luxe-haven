@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import {gsap} from "gsap";
 
 document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector(".gsap-hero");

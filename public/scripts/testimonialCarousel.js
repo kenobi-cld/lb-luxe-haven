@@ -1,4 +1,4 @@
-import gsap from "gsap";
+import {gsap} from "gsap";
 
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.querySelector(".testimonial-track");
