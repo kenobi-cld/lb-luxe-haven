@@ -1,6 +1,6 @@
 import {gsap} from "gsap";
-import { urlFor } from "../../src/lib/sanityImage.js";
-import initModalCarousel from "./modalCarousel.js";
+import { urlFor } from "../lib/sanityImage.js";
+import initModalCarousel from "../../public/scripts/modalCarousel.js";
 
 const { setSlides } = initModalCarousel();
 export default function initProjectModal() {

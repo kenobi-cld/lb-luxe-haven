@@ -2,7 +2,7 @@
 @import "tailwindcss";
 
 .bg-logo-primary {
-  background-color: hsl(233deg 18.67% 49.1%);
+  background-color: #0f164b;
 }
 
 .mona {
@@ -61,7 +61,6 @@ section{
 
 .title-trapezoid {
   padding: 12px 24px;
-  background: hsl(233deg 18.67% 49.1%);
   display: flex;
   color: white;
   align-items: center;
@@ -69,4 +68,8 @@ section{
   corner-shape: superellipse(-1.5);
   border-radius: 12px;
   z-index: 10;
+}
+
+body{
+  background-color: #d2c7abbd;
 }

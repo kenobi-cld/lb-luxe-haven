@@ -9,15 +9,15 @@ const { title, description } = Astro.props;
 
 <div class="w-full mt-20 border-b-2 border-t-2">
   <div
-    class="hero-sub w-3/5 border-l-2 border-r-2 mx-auto h-[40vh] md:pb-8 pb-4 flex items-end"
+    class="hero-sub w-3/5 border-l-2 border-r-2 mx-auto h-[40vh] md:pb-6 pb-4 flex items-end"
   >
-  <div class="gsap-hero flex flex-col items-center w-full">
+  <div class="gsap-hero flex flex-col items-center w-full md:px-20 px-0">
     <h1 class="mona font-bold tracking-tight md:text-4xl text-3xl text-center">{title}</h1>
-    <p class="grotesk font-medium px-4 text-balance text-center w-fit text-sm md:text-md">{description}</p>
-    <div class="flex gap-2 mt-2">
+    <p class="grotesk font-medium px-4 text-balance mt-2 text-center w-fit text-sm md:text-md">{description}</p>
+    <div class="flex gap-2 pt-4">
       <slot />
     </div>
     </div>
   </div>
 </div>
-<script type="module" src="/scripts/heroIntro.js"></script>
+<script type="module" src="/src/scripts/heroIntro.js"></script>

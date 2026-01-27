@@ -31,7 +31,7 @@ const projects = await sanityClient.fetch(`
   <Navbar />
 
   <HeroSub
-    title="Projects | LB Luxe Haven"
+    title="Projects"
     description="A portfolio of residential, institutional, and industrial projects delivered through decades of engineering expertise, disciplined execution, and ethical business practices."
   >
     <Button href="/contact">Know more</Button>
@@ -104,10 +104,10 @@ const projects = await sanityClient.fetch(`
 <ProjectModal />
 
 <script type="module">
-  import "/scripts/scrollReveal.js";
-  import "/scripts/filterProjects.js";
+  import "/src/scripts/scrollReveal.js";
+  import "/src/scripts/filterProjects.js";
   import initCarousel from "/scripts/carousel.js";
-  import initProjectModal from "/scripts/modalOpen.js";
+  import initProjectModal from "/src/scripts/modalOpen.js";
 
   document.addEventListener("DOMContentLoaded", () => {
     initCarousel(".embla__viewport");
