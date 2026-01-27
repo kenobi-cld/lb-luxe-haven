@@ -29,16 +29,15 @@ const services = await sanityClient.fetch(`
     </HeroSub>
 
     <section class="flex flex-wrap gap-2 items-center justify-center">
-        {
-            services.map((service: any) => (
+        {services.slice().sort((a:any,b:any) => a.id - b.id).map((service: any) => (
                 <div
                     key={service.id}
-                    class="flex w-120 rounded p-2 flex-col gap-24 border"
+                    class="flex w-120 rounded p-4 flex-col gap-24 border"
                 >
-                    <span class="ml-auto">{service.id}</span>
+                    <span class="ml-auto">{String(service.id).padStart(2, '0')}</span>
                     <div class="flex flex-col gap-1">
-                        <h2 class="mona font-bold text-2xl">{service.title}</h2>
-                        <p class="grotesk text-gray-900">
+                        <h2 class="mona font-bold text-xl">{service.title}</h2>
+                        <p class="grotesk text-sm text-gray-900">
                             {service.description}
                         </p>
                     </div>
