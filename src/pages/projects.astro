@@ -9,6 +9,7 @@ import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 
 import { sanityClient } from "../lib/sanity";
+import ProjectScripts from "../components/ProjectScripts.astro";
 
 const projects = await sanityClient.fetch(`
   *[_type == "project"] | order(_createdAt desc) {
@@ -102,3 +103,4 @@ const projects = await sanityClient.fetch(`
 </Layout>
 
 <ProjectModal />
+<ProjectScripts />
