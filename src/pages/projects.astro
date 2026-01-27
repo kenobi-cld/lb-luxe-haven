@@ -7,11 +7,6 @@ import ProjectCard from "../components/ProjectCard.astro";
 import ProjectModal from "../components/ProjectModal.astro";
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
-  import "../scripts/scrollReveal";
-  import "../scripts/textReveal";
-  import "../scripts/filterProjects";
-  import initCarousel from "../scripts/carousel"
-  import initProjectModal from "../scripts/modalOpen";
 
 import { sanityClient } from "../lib/sanity";
 
@@ -107,9 +102,3 @@ const projects = await sanityClient.fetch(`
 </Layout>
 
 <ProjectModal />
-
-<script type="module">
-
-  initCarousel(".embla__viewport");
-  initProjectModal();
-</script>

@@ -3,7 +3,7 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-document.addEventListener("DOMContentLoaded", () => {
+if (typeof window !== "undefined") {
   const buttons = document.querySelectorAll(".filter-btn");
   const items = gsap.utils.toArray(".project-item");
   const noResults = document.getElementById("no-results");
@@ -66,4 +66,4 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
   });
-});
+}

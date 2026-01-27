@@ -3,7 +3,7 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-document.addEventListener("DOMContentLoaded", () => {
+if (typeof window !== "undefined") {
   // Text blocks (headings, paragraphs, buttons)
   gsap.utils.toArray(".gsap-text").forEach((el) => {
     gsap.fromTo(
@@ -69,4 +69,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     );
   });
-});
+}
