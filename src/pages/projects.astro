@@ -1,8 +1,4 @@
 ---
-import "../scripts/scrollReveal";
-import "../scripts/textReveal";
-import "../scripts/filterProjects";
-import initProjectModal from "../scripts/modalOpen";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 import HeroSub from "../components/Hero-Sub.astro";
@@ -11,6 +7,11 @@ import ProjectCard from "../components/ProjectCard.astro";
 import ProjectModal from "../components/ProjectModal.astro";
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
+  import "../scripts/scrollReveal";
+  import "../scripts/textReveal";
+  import "../scripts/filterProjects";
+  import initCarousel from "../scripts/carousel"
+  import initProjectModal from "../scripts/modalOpen";
 
 import { sanityClient } from "../lib/sanity";
 
@@ -108,8 +109,7 @@ const projects = await sanityClient.fetch(`
 <ProjectModal />
 
 <script type="module">
-  document.addEventListener("DOMContentLoaded", () => {
-    initCarousel(".embla__viewport");
-    initProjectModal();
-  });
+
+  initCarousel(".embla__viewport");
+  initProjectModal();
 </script>
