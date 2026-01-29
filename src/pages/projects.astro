@@ -85,7 +85,7 @@ const projects = await sanityClient.fetch(`
             class="project-item transition-all duration-500 ease-out"
             data-tags={project.tags.join(",")}
           >
-            <ProjectCard project={project} />
+            <ProjectCard project={project} client:load/>
           </div>
         ))
       }
@@ -102,5 +102,5 @@ const projects = await sanityClient.fetch(`
   <Footer />
 </Layout>
 
-<ProjectModal />
+<ProjectModal client:load/>
 <ProjectScripts />

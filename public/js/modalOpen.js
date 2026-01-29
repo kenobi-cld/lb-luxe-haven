@@ -1,5 +1,5 @@
 import { gsap } from "gsap";
-import { urlFor } from "../lib/sanityImage";
+import { urlFor } from "../../src/lib/sanityImage"
 
 export default function initProjectModal() {
   if (typeof document === "undefined") return;

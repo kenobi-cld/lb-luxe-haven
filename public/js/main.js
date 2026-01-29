@@ -1,11 +1,11 @@
 import "./filterProjects.js";
 import "./heroIntro.js";
-import "./modalOpen.js"
+import "./modalOpen.js";
 import "./scrollReveal.js";
-import "./testimonialCarousel.js";
 import "./textReveal.js";
+import "./testimonialCarousel.js";
 
 import initProjectModal from "./modalOpen.js";
 initProjectModal();
 
-console.log("main from src")
+console.log("main from public/src")

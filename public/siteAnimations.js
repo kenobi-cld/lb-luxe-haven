@@ -1,0 +1,427 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { urlFor } from "../../src/lib/sanityImage"
+
+gsap.registerPlugin(ScrollTrigger);
+
+function initCarousel(selector) {
+  const carousels = document.querySelectorAll(selector);
+  carousels.forEach((carousel) => {
+    const inner = carousel.querySelector(".carousel-inner");
+    const slides = carousel.querySelectorAll(".carousel-slide");
+    const prevBtn = carousel.querySelector(".carousel-btn.left");
+    const nextBtn = carousel.querySelector(".carousel-btn.right");
+
+    let index = 0;
+
+    function showSlide(i) {
+      index = (i + slides.length) % slides.length; // wrap around
+      inner.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    prevBtn.addEventListener("click", () => showSlide(index - 1));
+    nextBtn.addEventListener("click", () => showSlide(index + 1));
+
+    showSlide(0);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contact-form")
+  const status = document.getElementById("form-status")
+
+  const ENDPOINT =
+    "https://script.google.com/macros/s/AKfycbzcGyT4WLeD5g1dSA7-sg1EwCCl4mIWLjGU52_s4sHcki8zzW90AieDVSFvmDHDfElERw/exec"
+
+  if (!form) return
+
+  const showStatus = (message, isError = true) => {
+    status.textContent = message
+    status.classList.remove("text-red-600", "text-green-600")
+    status.classList.add(isError ? "text-red-600" : "text-green-600")
+    status.style.opacity = "1"
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault()
+
+    const formData = new FormData(form)
+
+    const name = formData.get("name")?.trim()
+    const email = formData.get("email")?.trim()
+    const phone = formData.get("phone")?.trim()
+    const message = formData.get("message")?.trim()
+
+    if (!name || !message) {
+      showStatus("Please fill in your name and message.")
+      return
+    }
+
+    if (!email && !phone) {
+      showStatus("Please provide either an email or phone number.")
+      return
+    }
+
+    if (email && !/^\S+@\S+\.\S+$/.test(email)) {
+      showStatus("Please enter a valid email address.")
+      return
+    }
+
+    const rawPhone = phone.replace(/\D/g, "")
+    if (phone && rawPhone.length !== 10) {
+      showStatus("Phone number must be exactly 10 digits.")
+      return
+    }
+
+    showStatus("Sending…", false)
+
+    try {
+      const response = await fetch(ENDPOINT, {
+        method: "POST",
+        body: new URLSearchParams(formData),
+      })
+
+      if (!response.ok) throw new Error("Network error")
+
+      showStatus("Thank you! Your message has been sent.", false)
+      form.reset()
+    } catch (err) {
+      showStatus("Something went wrong. Please try again.")
+      console.error(err)
+    }
+  })
+})
+
+const buttons = document.querySelectorAll(".filter-btn");
+const items = gsap.utils.toArray(".project-item");
+const noResults = document.getElementById("no-results");
+
+let activeFilter = "all";
+
+gsap.set(items, { height: "auto", opacity: 1, scale: 1 });
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const filter = button.dataset.filter;
+    if (!filter || filter === activeFilter) return;
+    activeFilter = filter;
+
+    // Active button styles
+    buttons.forEach((btn) => {
+      btn.classList.remove("bg-black", "text-white", "border-black");
+      btn.classList.add("border-gray-600", "text-gray-700");
+    });
+
+    button.classList.add("bg-black", "text-white", "border-black");
+    button.classList.remove("border-gray-600", "text-gray-700");
+
+    let visibleCount = 0;
+
+    items.forEach((item) => {
+      const tags = (item.dataset.tags || "")
+        .toLowerCase()
+        .split(",");
+
+      const match = filter === "all" || tags.includes(filter);
+
+      if (match) {
+        visibleCount++;
+        gsap.to(item, {
+          autoAlpha: 1,
+          scale: 1,
+          height: "auto",
+          duration: 0.45,
+          ease: "power2.out",
+          clearProps: "height"
+        });
+      } else {
+        gsap.to(item, {
+          autoAlpha: 0,
+          scale: 0.96,
+          height: 0,
+          duration: 0.35,
+          ease: "power2.in"
+        });
+      }
+    });
+
+    if (noResults) {
+      noResults.classList.toggle("hidden", visibleCount !== 0);
+    }
+
+    gsap.delayedCall(0.5, () => {
+      ScrollTrigger.refresh();
+    });
+  });
+});
+
+const hero = document.querySelector(".gsap-hero");
+
+gsap.fromTo(
+  hero,
+  {
+    opacity: 0.75,
+    scale: 0.8
+  },
+  {
+    opacity: 1,
+    scale: 1,
+    duration: 0.5,
+    ease: "power2.out",
+    clearProps: "transform"
+  }
+);
+
+function initProjectModal() {
+  if (typeof document === "undefined") return;
+
+  // init carousel AFTER client load
+  const carouselApi = initModalCarousel();
+  if (!carouselApi) return;
+
+  const { setSlides } = carouselApi;
+
+  const modal = document.getElementById("project-modal");
+  if (!modal) return;
+
+  const modalContent = modal.querySelector(".modal-main");
+  const closeBtn = document.getElementById("modal-close");
+  const title = document.getElementById("modal-title");
+  const location = document.getElementById("modal-location");
+  const overview = document.getElementById("modal-overview");
+  const category = document.getElementById("modal-category");
+  const outcome = document.getElementById("modal-outcome");
+  const scope = document.getElementById("modal-scope");
+
+  const openModal = (project) => {
+    scope.innerHTML = "";
+    category.innerHTML = "";
+
+    const carouselImages = (project.images || []).map((img) => ({
+      url: urlFor(img).width(1200).url(),
+      alt: img.alt || project.title || "",
+    }));
+
+    setSlides(carouselImages);
+
+    title.textContent = project.title;
+    location.textContent = project.location || "";
+    overview.textContent = project.modal?.overview || "";
+    category.textContent = project?.category || "";
+    outcome.textContent = project.modal?.outcome || "";
+
+    project.modal?.scope?.forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      scope.appendChild(li);
+    });
+
+    modal.classList.remove("hidden");
+    modal.classList.add("flex");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("overflow-hidden", "pr-3");
+
+    gsap.set(modalContent, { opacity: 0, scale: 0.9, y: 40 });
+    gsap.to(modalContent, { opacity: 1, scale: 1, y: 0, duration: 0.25, ease: "power3.out" });
+    gsap.fromTo(modal, { opacity: 0 }, { opacity: 1, duration: 0.3 });
+  };
+
+  const closeModal = () => {
+    gsap.to(modalContent, {
+      opacity: 0,
+      scale: 0.9,
+      y: 40,
+      duration: 0.2,
+      ease: "power3.in",
+      onComplete: () => {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("overflow-hidden", "pr-3");
+      },
+    });
+    gsap.to(modal, { opacity: 0, duration: 0.2 });
+  };
+
+  document.addEventListener("click", (e) => {
+    const card = e.target.closest(".project-card");
+    if (!card) return;
+
+    try {
+      openModal(JSON.parse(card.dataset.project));
+    } catch (err) {
+      console.error("Invalid data-project JSON:", err);
+    }
+  });
+
+  closeBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", (e) => e.target === modal && closeModal());
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !modal.classList.contains("hidden")) closeModal();
+  });
+}
+
+function initModalCarousel() {
+  const carousel = document.getElementById("modal-carousel");
+  if (!carousel) return;
+
+  const inner = carousel.querySelector(".carousel-inner");
+  const prevBtn = carousel.querySelector(".carousel-btn.left");
+  const nextBtn = carousel.querySelector(".carousel-btn.right");
+
+  let slides = [];
+  let index = 0;
+
+  function showSlide(i) {
+    if (!slides.length) return;
+    index = (i + slides.length) % slides.length;
+    inner.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  function setSlides(images) {
+    inner.innerHTML = "";
+    slides = images.map((img) => {
+      const div = document.createElement("div");
+      div.className = "carousel-slide min-w-full";
+      div.innerHTML = `<img src="${img.url}" alt="${img.alt || ""}" class="w-full object-cover rounded-lg" />`;
+      inner.appendChild(div);
+      return div;
+    });
+    showSlide(0);
+  }
+
+  prevBtn.addEventListener("click", () => showSlide(index - 1));
+  nextBtn.addEventListener("click", () => showSlide(index + 1));
+
+  return { setSlides };
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  const cards = gsap.utils.toArray(".gsap-card");
+
+  cards.forEach((card) => {
+    gsap.fromTo(
+      card,
+      {
+        opacity: 0,
+        filter: "blur(6px)",
+        y: 24
+      },
+      {
+        opacity: 1,
+        filter: "blur(0px)",
+        y: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: card,
+          start: "top 85%",
+          once: true
+        }
+      }
+    );
+  });
+
+  ScrollTrigger.refresh();
+});
+
+
+const track = document.querySelector(".testimonial-track");
+const slides = gsap.utils.toArray(".testimonial-slide");
+const prevBtn = document.querySelector(".testimonial-prev");
+const nextBtn = document.querySelector(".testimonial-next");
+
+let index = 0;
+const total = slides.length;
+
+// Ensure correct width
+function updatePosition(animate = true) {
+  const x = -index * 100;
+
+  gsap.to(track, {
+    xPercent: x,
+    duration: animate ? 0.6 : 0,
+    ease: "power2.out"
+  });
+}
+
+nextBtn?.addEventListener("click", () => {
+  index = (index + 1) % total;
+  updatePosition();
+});
+
+prevBtn?.addEventListener("click", () => {
+  index = (index - 1 + total) % total;
+  updatePosition();
+});
+
+// Init
+gsap.set(track, { xPercent: 0 });
+
+// Text blocks (headings, paragraphs, buttons)
+gsap.utils.toArray(".gsap-text").forEach((el) => {
+  gsap.fromTo(
+    el,
+    {
+      opacity: 0,
+      y: 24
+    },
+    {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%",
+        once: true
+      }
+    }
+  );
+});
+
+// Larger grouped blocks (sections)
+gsap.utils.toArray(".gsap-block").forEach((block) => {
+  gsap.fromTo(
+    block,
+    {
+      opacity: 0,
+      scale: 0.96
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 0.6,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: block,
+        start: "top 80%",
+        once: true
+      }
+    }
+  );
+});
+
+// Optional image reveal
+gsap.utils.toArray(".gsap-image").forEach((img) => {
+  gsap.fromTo(
+    img,
+    {
+      opacity: 0,
+      scale: 1.05
+    },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 0.9,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: img,
+        start: "top 85%",
+        once: true
+      }
+    }
+  );
+});
+initCarousel();
+initProjectModal();
