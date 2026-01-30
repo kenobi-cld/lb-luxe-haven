@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 import Testimonials from "../components/Testimonials.astro";
 import { sanityClient } from "../lib/sanity";
 
-export const testimonials = await sanityClient.fetch(`
+const testimonials = await sanityClient.fetch(`
   *[_type == "testimonial"] | order(_createdAt desc) {
     id,
     testimonial,
@@ -15,6 +15,12 @@ export const testimonials = await sanityClient.fetch(`
   }
 `);
 
+const clients = await sanityClient.fetch(`
+  *[_type == "client"] | order(_createdAt desc) {
+    name,
+    image
+  }
+`)
 ---
 
 <Layout title="About | LB Luxe Haven" description="About LB Luxe Haven | Learn about our journey, values, and expertise in delivering high-quality construction and development projects with a focus on trust, safety, and lasting value.">
@@ -50,11 +56,23 @@ export const testimonials = await sanityClient.fetch(`
     }}
 
   />
-<Testimonials
+<!-- <Testimonials
   title="What Our Clients Say"
   description="Feedback from clients and collaborators reflecting our commitment to quality, transparency, and disciplined execution."
   testimonials={testimonials}
-/>
+/> -->
+<section class="gsap-block">
+  <h2 class="gsap-text mona text-4xl font-black tracking-tight">Clients We Worked With</h2>
+  <p class="gsap-text grotesk mb-4">We work with clients across various developments, delivering projects through structured construction processes and strict quality controls. Each collaboration is guided by clear technical standards, regulatory compliance, and disciplined project execution to ensure reliable outcomes.</p>
+  <div class="flex flex-wrap gap-2">
+    {clients.map((client: any) => {
+      <div class="gsap-block rounded-xl w-fit flex flex-col items-center bg-logo-primary text-[#d2c7ab]">
+        <img src={client.image} alt={client.name} class="gsap-block rounded-t-xl h-32 w-60 object-cover border-2" />
+        <p class="gsap-text p-2 mx-2 font-bold text-sm text-center w-full mx-auto">{client.name}</p>
+      </div>
+    })}
+  </div>
+</section>
 
   <Footer />
 </Layout>

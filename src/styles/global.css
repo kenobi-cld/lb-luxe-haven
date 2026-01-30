@@ -62,7 +62,7 @@ section{
 .title-trapezoid {
   padding: 12px 24px;
   display: flex;
-  color: white;
+  color: #d2c7ab;
   align-items: center;
   justify-content: center;
   corner-shape: superellipse(-1.5);
@@ -72,4 +72,10 @@ section{
 
 body{
   background-color: #d2c7abbd;
+}
+
+.hero{
+  background: url('/hero.png');
+  background-position: center;
+  background-size: cover;
 }

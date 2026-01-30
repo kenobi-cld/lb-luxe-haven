@@ -35,15 +35,12 @@ const features = await sanityClient.fetch(homeFeaturesQuery);
 
 <Layout title="LB Luxe Haven" description="Luxury construction and real estate development">
   <Navbar />
-<div
-  class="relative w-[calc(100vw-4rem)] min-h-[calc(100vh-8rem)] mx-auto md:px-6 md:pb-10 pb-4 px-4 bg-cover bg-center rounded-2xl mt-24 pt-20 overflow-hidden flex items-end"
-  style="background-image: url('https://www.placehold.net/1600x900');"
-  >
+<div class="relative w-[calc(100vw-4rem)] min-h-[calc(100vh-6rem)] mx-auto md:px-6 md:pb-10 pb-4 px-4 bg-cover bg-center rounded-2xl mt-20 pt-20 overflow-hidden flex items-end">
 
-    <div class="absolute inset-0 bg-black/30"></div>
+    <div class="absolute inset-0 hero"></div>
     <div class="relative grid grid-cols-12 h-full w-full gap-4 mx-auto md:px-6 px-0 pt-6">
       <div class="col-span-12 md:col-span-6 flex flex-col justify-center gap-4 gsap-text">
-        <h1 class="mona font-black tracking-tight md:text-5xl text-3xl text-white leading-tight">
+        <h1 class="mona shadow-xs font-black tracking-tight md:text-5xl text-3xl text-white leading-tight">
           Building Spaces<br />That Endure.
         </h1>
 
@@ -115,7 +112,7 @@ const features = await sanityClient.fetch(homeFeaturesQuery);
     <!-- Left Side (image container sticking out) -->
     <div class="relative flex-1 flex justify-end items-end">
       <div class="absolute bottom-0 left-0 w-full h-[250px] bg-gray-400 rounded-xl bg-cover bg-center gsap-block"
-           style="background-image: url('https://placehold.net/600x800.png')">
+           style="background-image: url('/contact.png')">
       </div>
     </div>
 
